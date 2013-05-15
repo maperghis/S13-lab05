@@ -142,7 +142,14 @@ public class AllMyDrawings
     public static void drawPicture3(Graphics2D g2) {
 	
 	// label the drawing
-	
+	g2.drawString("My Car",20,20);
+
+	//Draw some cars
+
+	Car large = new Car(100,100,300,200);
+	g2.setColor(Color.RED); g2.draw(large);
+
+	/*
 	g2.drawString("A bunch of Coffee Cups by Phill Conrad", 20,20);
 
 	
@@ -154,7 +161,7 @@ public class AllMyDrawings
        g2.setColor(Color.RED);     g2.draw(large);
        g2.setColor(Color.GREEN);   g2.draw(smallCC);
        
-       
+	*/
     }
     
 
