@@ -145,23 +145,11 @@ public class AllMyDrawings
 	g2.drawString("My Car",20,20);
 
 	//Draw some cars
-
-	Car large = new Car(100,100,300,200);
+	//HouseWithWindows large = new HouseWithWindows(100,100,300,200);
+	CarWithTrailer large = new CarWithTrailer(100,100,300,200);
 	g2.setColor(Color.RED); g2.draw(large);
 
-	/*
-	g2.drawString("A bunch of Coffee Cups by Phill Conrad", 20,20);
-
-	
-	// Draw some coffee cups.
-	
-       CoffeeCup large = new CoffeeCup(100,50,225,150);
-       CoffeeCup smallCC = new CoffeeCup(20,50,40,30);
-       
-       g2.setColor(Color.RED);     g2.draw(large);
-       g2.setColor(Color.GREEN);   g2.draw(smallCC);
-       
-	*/
+        
     }
     
 
