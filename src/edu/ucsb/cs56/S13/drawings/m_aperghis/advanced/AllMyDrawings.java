@@ -142,14 +142,15 @@ public class AllMyDrawings
     public static void drawPicture3(Graphics2D g2) {
 	
 	// label the drawing
-	g2.drawString("My Car",20,20);
+	g2.drawString("My Car Again",20,20);
 
 	//Draw some cars
-	//HouseWithWindows large = new HouseWithWindows(100,100,300,200);
+	//HouseWithWindows h = new HouseWithWindows(100,100,300,200);
 	CarWithTrailer large = new CarWithTrailer(100,100,300,200);
 	g2.setColor(Color.RED); g2.draw(large);
 
-        
+	//HouseWithWindows h = new HouseWithWindows(200,200,200,200);
+       	//g2.setColor(Color.BLUE); g2.draw(h); 
     }
     
 

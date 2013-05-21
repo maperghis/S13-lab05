@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.Rectangle;
 import java.awt.geom.PathIterator;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
 
 import edu.ucsb.cs56.S13.drawings.utilities.ShapeTransforms;
 import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
@@ -33,22 +34,25 @@ public class CarWithTrailer extends Car implements Shape
 	GeneralPath gp = this.get();
 
 	// Make the trailer
-	double trailerTopLeftX = x + width + width*0.1;
-	double trailerTopLeftY = y + height*0.6;
+	double trailerTopLeftX = x + width + (width*0.1);
+	double trailerTopLeftY = y + (height*0.6);
 	double trailerWidth = width*0.5;
-	double trailerHeight = height - trailerTopLeftY;
+	double trailerHeight = y + height - trailerTopLeftY;
 
 	Rectangle2D.Double trailer =
 	    new Rectangle2D.Double(trailerTopLeftX,
 				   trailerTopLeftY,
 				   trailerWidth,
-				   trailerHeight);
+				   trailerHeight); 
 
-        
+	double wheel1TopLeftX = trailerTopLeftX + (0.1*trailerWidth);
+	
+	Circle wheel1 = new Circle(100,100,50);
 
 	// get the GeneralPath that we are going to append the trailer to
         GeneralPath wholeCar = this.get();
         wholeCar.append(trailer, false);
+	wholeCar.append(wheel1, false);
         
     }
 
