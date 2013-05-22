@@ -19,14 +19,14 @@ import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
 /**
  * A class with static methods for drawing various pictures
  * 
- * @author Phill Conrad 
- * @version for CS10, lab06, Spring 2009
+ * @author Miranda Aperghis 
+ * @version for CS56, lab06, S13, 19/05/2013
  */
 
 
 public class AllMyDrawings
 {
-    /** Draw a picture with a few houses 
+    /** Draw a picture with a few cars 
      */
 
     public static void drawPicture1(Graphics2D g2) {
@@ -136,7 +136,7 @@ public class AllMyDrawings
 	g2.drawString("A bunch of Coffee Cups and a few houses by Phill Conrad", 20,20);
     }
   
-    /** Draw a different picture with a few houses and coffee cups
+    /** Draw a different picture with a few cars
      */
 
     public static void drawPicture3(Graphics2D g2) {
@@ -145,12 +145,13 @@ public class AllMyDrawings
 	g2.drawString("My Car Again",20,20);
 
 	//Draw some cars
-	//HouseWithWindows h = new HouseWithWindows(100,100,300,200);
-	CarWithTrailer large = new CarWithTrailer(100,100,300,200);
-	g2.setColor(Color.RED); g2.draw(large);
+	Car car1 = new Car(100,100,300,200);
+	g2.setColor(Color.RED); g2.draw(car1);
 
-	//HouseWithWindows h = new HouseWithWindows(200,200,200,200);
-       	//g2.setColor(Color.BLUE); g2.draw(h); 
+	//Draw some cars
+	CarWithTrailer car2 = new CarWithTrailer(100,100,300,200);
+	g2.setColor(Color.BLUE); g2.draw(car2);
+
     }
     
 

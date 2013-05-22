@@ -17,12 +17,12 @@ import edu.ucsb.cs56.S13.drawings.utilities.ShapeTransforms;
 import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
 
 /**
-   A vector drawing of a house that implements
+   A vector drawing of a car that implements
    the Shape interface, and so can be drawn, as well as
    rotated, scaled, etc.
       
-   @author Phill Conrad 
-   @version for CS56, Winter 11, UCSB
+   @author Miranda Aperghis
+   @version for CS56, lab06, S13, 19/05/2013
    
 */
 public class Car extends GeneralPathWrapper implements Shape
@@ -30,52 +30,80 @@ public class Car extends GeneralPathWrapper implements Shape
     /**
        Constructor
 
-       @param x x coord of lower left corner of house
-       @param y y coord of lower left corner of house
-       @param width width of the house
-       @param height of house (including first story and second story)
+       @param x x coord of bottom left corner of car
+       @param y y coord of bottom left corner of car
+       @param width width of the car
+       @param height height of the car
      */
     public Car(double x, double y, double width, double height)
     {
-    
-	double bodyHeight = .55 * height;
-	double topHeight = height - bodyHeight;	
-	double topWidth = .70 * width;
-	double bodyUpperLeftY = y + topHeight;
-	double wheelRadius = .18 * width;
-	double wheel1UpperLeftX = x + wheelRadius + (width * 0.09);
-	double wheel2UpperLeftX = x + width - wheelRadius - (width * 0.09);
+	//Radius of wheels
+    	double wheelRadius = 0.15 * width;	
+	//Edges of wheels
+	double leftEdgeWheel1X = x + (width * 0.09);
+	double rightEdgeWheel2X = x + width - (width * 0.09);
+	double leftEdgeWheel2X = rightEdgeWheel2X - (wheelRadius * 2);
+	double rightEdgeWheel1X = leftEdgeWheel1X + (wheelRadius * 2);
+	//Body of car
+	double bottomCarY = y + height - wheelRadius;
+	double bonnetY = bottomCarY - (height * 0.45);
+	double windShieldX = x + (width * 0.30);
+	double topWindShieldX = x + (width * 0.56);
+	//Wheels
+	double wheel1CenterX = leftEdgeWheel1X + wheelRadius;
+	double wheel1CenterY = bottomCarY;
+	double wheel2CenterX = rightEdgeWheel2X - wheelRadius;
+	double wheel2CenterY = wheel1CenterY;
+	//Windows
+	double topLeftWindowX =	x + (width * 0.60); 
+	double topLeftWindowY =	y + (height * 0.05);
+	double windowWidth = (width * 0.4) - (width * 0.05);	
+	double windowHeight = bonnetY - y - (height * 0.05);
 
-	//Make body of car
-	Rectangle2D.Double body =
-	    new Rectangle2D.Double(x, bodyUpperLeftY,
-				   width, bodyHeight);
 
-	
-	//Make the top of the car
-	GeneralPath top = new GeneralPath();
-	top.moveTo(x + (width * 0.2), y + topHeight);
-        top.lineTo(x + (width * 0.3), y);
-	top.lineTo(x + width, y);
-	top.lineTo(x + width, y + topHeight);
-
-        
 	//Make the first wheel
-	Circle wheel1 = new Circle(wheel1UpperLeftX,
-				   y+height,
+	Circle wheel1 = new Circle(wheel1CenterX,
+				   wheel1CenterY,
 				   wheelRadius);
 	
 	//Make the second wheel
-	Circle wheel2 = new Circle(wheel2UpperLeftX,
-				   y+height,
+	Circle wheel2 = new Circle(wheel2CenterX,
+				   wheel2CenterY,
 				   wheelRadius);
 
+	//Make body of car
+	GeneralPath body = new GeneralPath();
+	body.moveTo(leftEdgeWheel1X,bottomCarY);
+	body.lineTo(x,bottomCarY);
+	body.lineTo(x,bonnetY);
+	body.lineTo(windShieldX,bonnetY);
+	body.lineTo(topWindShieldX,y);
+	body.lineTo(x + width, y);
+	body.lineTo(x + width, bottomCarY);
+	body.lineTo(rightEdgeWheel2X, bottomCarY);
+	body.moveTo(leftEdgeWheel2X, bottomCarY);
+	body.lineTo(rightEdgeWheel1X, bottomCarY);
+
+	//Make windows of car
+	Rectangle2D.Double window = 
+            new Rectangle2D.Double(topLeftWindowX,
+				   topLeftWindowY,
+				   windowWidth,
+				   windowHeight);
+	
+	GeneralPath windShield = new GeneralPath();
+	windShield.moveTo(windShieldX + (height * 0.05), bonnetY);
+	windShield.lineTo(topLeftWindowX - (height * 0.05), topLeftWindowY);
+	windShield.lineTo(topLeftWindowX - (height * 0.05), bonnetY);
+	windShield.lineTo(windShieldX + (height * 0.05), bonnetY); 	
+	
 	//Add all the parts of the car
 	GeneralPath wholeCar = this.get();
-	wholeCar.append(body, false);
-	wholeCar.append(top, false);
 	wholeCar.append(wheel1, false);
 	wholeCar.append(wheel2, false);
+	wholeCar.append(body, false);
+	wholeCar.append(window, false);
+	wholeCar.append(windShield, false);
 
     }
 

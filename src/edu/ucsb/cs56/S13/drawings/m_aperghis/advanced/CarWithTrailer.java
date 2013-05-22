@@ -14,45 +14,68 @@ import java.awt.geom.Ellipse2D;
 
 import edu.ucsb.cs56.S13.drawings.utilities.ShapeTransforms;
 import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
+
 /**
-   A House
+   A vector drawing of a car with a trailer that implements
+   the Shape interface, and so can be drawn, as well as
+   rotated, scaled, etc. It extends the Car Class.
       
-   @author Phill Conrad 
-   @version for CS56, W11, UCSB, 02/23/2011
+   @author Miranda Aperghis
+   @version for CS56, lab06, S13, 19/05/2013
+   @see Car
    
 */
 public class CarWithTrailer extends Car implements Shape
 {
-    /**
-     * Constructor for objects of class CoffeeCup
+     /**
+       Constructor
+
+       @param x x coord of bottom left corner of car
+       @param y y coord of bottom left corner of car
+       @param width width of the car
+       @param height height of the car
      */
     public CarWithTrailer(double x, double y, double width, double height)
     {
 	// construct the basic car
 	super(x,y,width,height);
-	
-	GeneralPath gp = this.get();
 
-	// Make the trailer
-	double trailerTopLeftX = x + width + (width*0.1);
-	double trailerTopLeftY = y + (height*0.6);
-	double trailerWidth = width*0.5;
-	double trailerHeight = y + height - trailerTopLeftY;
+	//Radius of wheels
+    	double wheelRadius = 0.15 * width;	
+	double bottomCarY = y + height - wheelRadius;
+	//Trailer co-ordinates
+	double trailerTopLeftX = x + width + (width*0.2);
+	double trailerTopLeftY = bottomCarY - (height * 0.45);
+	double trailerWidth = width * 0.7;
+	double trailerHeight = y + height - trailerTopLeftY - wheelRadius;
 
+	//Draw trailer
 	Rectangle2D.Double trailer =
 	    new Rectangle2D.Double(trailerTopLeftX,
 				   trailerTopLeftY,
 				   trailerWidth,
 				   trailerHeight); 
 
-	double wheel1TopLeftX = trailerTopLeftX + (0.1*trailerWidth);
-	
-	Circle wheel1 = new Circle(100,100,50);
+	double wheel1CenterX = trailerTopLeftX + (trailerWidth * 0.05) + wheelRadius;
+	double wheel2CenterX = trailerTopLeftX + trailerWidth - (trailerWidth * 0.05) - wheelRadius;
 
-	// get the GeneralPath that we are going to append the trailer to
+	//Draw cirlces
+	Circle wheel1 = new Circle(wheel1CenterX,bottomCarY,wheelRadius);
+	Circle wheel2 = new Circle(wheel2CenterX,bottomCarY,wheelRadius);
+
+	//Draw trailer connection
+	GeneralPath g = new GeneralPath();
+	g.moveTo(x+width,y+(height*0.5));
+	g.lineTo(trailerTopLeftX,y+(height*0.5));
+	g.moveTo(trailerTopLeftX,y+(height*0.52));
+	g.lineTo(x+width,y+(height*0.52));
+	
+	//Get the GeneralPath that we are going to append the new trailer to
         GeneralPath wholeCar = this.get();
         wholeCar.append(trailer, false);
 	wholeCar.append(wheel1, false);
+	wholeCar.append(wheel2, false);
+	wholeCar.append(g, false);
         
     }
 
