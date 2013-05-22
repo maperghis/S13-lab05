@@ -54,9 +54,9 @@ public class AllMyDrawings
 	g2.setColor(new Color(0xFDEE00)); 
 	g2.draw(c2); 
 
-	// Sign the image
 	g2.setStroke(orig);
 	g2.setColor(Color.BLACK); 
+
 	g2.drawString("A few cars by Miranda Aperghis", 20,20);
 
     }
@@ -90,7 +90,6 @@ public class AllMyDrawings
 	g2.setColor(new Color(0x8F00FF)); 
 	g2.draw(ct2);
 	
-	// Sign the image
 	g2.setStroke(orig);
 	g2.setColor(Color.BLACK); 
 	g2.drawString("Some cars and cars with trailers by Miranda Aperghis", 20,20);
@@ -132,7 +131,7 @@ public class AllMyDrawings
 	// Sign the image
 	g2.setStroke(orig);
 	g2.setColor(Color.BLACK); 
-	g2.drawString("Some cars with trailers by Miranda Aperghis", 20,20);
+	g2.drawString("Some cars and cars with trailers by Miranda Aperghis", 20,20);
 
     }
     
